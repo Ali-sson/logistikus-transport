@@ -54,7 +54,9 @@ const amount = Math.round(booking.totalAmount * 100);
         email: booking.passengerEmail,
         amount,
         currency: "NGN",
-        callback_url: "http://localhost:5174/payment-callback",
+        callback_url: "https://logistikus-transport.vercel.app/payment-callback",
+        
+        // "http://localhost:5174/payment-callback",
         metadata: {
           bookingId: booking._id.toString(),
           bookingReference: booking.bookingReference,
