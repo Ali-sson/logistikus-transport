@@ -6,6 +6,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+import logo from "../assets/Logo2.png"; 
+
 function Footer() {
   return (
     <footer
@@ -17,17 +19,19 @@ function Footer() {
 
           {/* Company information */}
           <div>
-            <a
-              href="#home"
-              className="text-2xl font-extrabold tracking-wide"
-            >
-              LOGISTIKUS
-              <span className="ml-1 text-cyan-300">TRAVELS</span>
-            </a>
+
+            <a href="#home" className="flex items-center">
+            <img
+              src={logo}
+              alt="Logistikus Transport Services"
+              className="h-12 w-auto object-contain"
+  />
+</a>
+           
 
             <p className="mt-4 max-w-xs text-sm leading-7 text-white/75">
-              Your travel partner for comfortable and convenient
-              journeys between Kaduna and Abuja.
+              Your trusted travel partner for comfortable, convenient, 
+              and reliable journeys to your destination.
             </p>
 
             <a
@@ -85,10 +89,19 @@ function Footer() {
               </p>
             </div>
 
-            <p className="mt-4 text-sm leading-6 text-white/75">
+             <div className="mt-5 flex items-start gap-3 text-sm text-white/75">
+              <MapPin size={19} className="mt-0.5 shrink-0 text-cyan-300" />
+              <p>
+                Abuja
+                <span className="mx-2 text-cyan-300">→</span>
+                Kaduna
+              </p>
+            </div>
+
+            {/* <p className="mt-4 text-sm leading-6 text-white/75">
               Check your booking confirmation for the latest
               departure information.
-            </p>
+            </p> */}
           </div>
 
           {/* Contact */}
@@ -98,7 +111,9 @@ function Footer() {
             <div className="mt-5 space-y-4 text-sm text-white/75">
               <p className="flex items-start gap-3">
                 <Phone size={18} className="mt-0.5 shrink-0 text-cyan-300" />
-                <span>Company phone number to be confirmed</span>
+                <span>0816 725 1663</span>
+                <span>0816 128 5804</span>
+
               </p>
 
               <p className="flex items-start gap-3">
@@ -106,10 +121,33 @@ function Footer() {
                 <span>Company email to be confirmed</span>
               </p>
 
-              <p className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 shrink-0 text-cyan-300" />
-                <span>Terminal address to be confirmed</span>
-              </p>
+            
+
+             <div className="mt-4 space-y-3 text-sm text-white/75">
+  <p className="flex items-start gap-3">
+    <MapPin size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+    <span>
+      <span className="block font-medium">Abuja Terminals</span>
+      <span className="mt-1 block text-white/60">
+        Boot 40, Mabushi Bus Terminal, FCT Abuja
+      </span>
+    </span>
+  </p>
+</div>
+
+  <div className="mt-4 space-y-3 text-sm text-white/75">
+                <p className="flex items-start gap-3">
+              <MapPin size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+             <span>
+      <span className="block font-medium">Kaduna Terminals</span>
+      <span className="mt-1 block text-white/60">
+        Shop 7, Third Floor, El-Gibbor Plaza, opposite Barnawa Market, Aliyu Makama, Barnawa Kaduna
+      </span>
+    </span>
+  </p>
+</div>
+
+
             </div>
           </div>
         </div>

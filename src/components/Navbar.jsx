@@ -9,18 +9,18 @@ function Navbar() {
     { label: "Home", href: "#home" },
     { label: "About Us", href: "#about" },
     { label: "Our Services", href: "#services" },
-    { label: "Rates & Schedule", href: "#schedule" },
+    // { label: "Rates & Schedule", href: "#schedule" },
     { label: "Contact", href: "#contact" },
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#home" aria-label="Logistikus Travels home">
           <img
             src={logo}
             alt="Logistikus Travels"
-            className="h-12 w-auto object-contain"
+            className="h-14 w-auto object-contain sm:h-20"
           />
         </a>
 
@@ -45,12 +45,12 @@ function Navbar() {
             Book a Trip
           </a>
 
-          <a
+          {/* <a
             href="#booking"
             className="rounded-full bg-brand-teal px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue"
           >
             Reserve Now
-          </a>
+          </a> */}
         </div>
 
         <button
@@ -65,7 +65,7 @@ function Navbar() {
       </nav>
 
       {menuOpen && (
-        <div className="border-t border-gray-100 bg-white px-5 py-4 shadow-lg lg:hidden">
+        <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-100 bg-white px-5 py-4 shadow-lg lg:hidden">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
