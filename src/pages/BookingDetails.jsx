@@ -15,6 +15,8 @@ import {
   Banknote,
 } from "lucide-react";
 
+import Navbar from "../components/Navbar";
+
 function BookingDetails() {
   const navigate = useNavigate();
 
@@ -109,6 +111,11 @@ function BookingDetails() {
   }
 
   return (
+    <>
+
+    <Navbar/>
+    
+   
     <section className="min-h-screen bg-gray-50 px-4 py-10 sm:px-6 sm:py-12">
       <div className="mx-auto max-w-3xl">
         <button
@@ -329,6 +336,7 @@ function BookingDetails() {
         </div>
       </div>
     </section>
+     </>
   );
 }
 
