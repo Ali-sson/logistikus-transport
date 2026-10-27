@@ -77,7 +77,7 @@ function Payment() {
 
       // Step 1: Create the booking in MongoDB.
       const bookingResponse = await fetch(
-        "http://localhost:5000/api/bookings",
+        `${import.meta.env.VITE_API_URL}/api/bookings`,
         {
           method: "POST",
           headers: {
@@ -136,7 +136,10 @@ body: JSON.stringify({
 
       // Step 3: Ask the backend to initialize Paystack.
       const paymentResponse = await fetch(
-        "http://localhost:5000/api/payments/initialize",
+        // "http://localhost:5000/api/payments/initialize",
+
+        `${import.meta.env.VITE_API_URL}/api/payments/initialize`,
+
         {
           method: "POST",
           headers: {

@@ -38,7 +38,8 @@ function PaymentCallback() {
       try {
         
 const response = await fetch(
-  `http://localhost:5000/api/payments/verify/${encodeURIComponent(reference)}`
+  // `http://localhost:5000/api/payments/verify/${encodeURIComponent(reference)}`
+  `${import.meta.env.VITE_API_URL}/api/payments/verify/${encodeURIComponent(reference)}`
 );
 
 const data = await response.json();

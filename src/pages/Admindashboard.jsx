@@ -72,7 +72,8 @@ function AdminDashboard() {
       setError("");
 
       const response = await adminFetch(
-        "http://localhost:5000/api/dashboard/stats"
+        // "http://localhost:5000/api/dashboard/stats"
+        `${import.meta.env.VITE_API_URL}/api/dashboard/stats`
       );
 
       if (!response.ok) {
@@ -95,7 +96,8 @@ function AdminDashboard() {
       setRecentError("");
 
       const response = await adminFetch(
-        "http://localhost:5000/api/dashboard/recent-bookings"
+        // "http://localhost:5000/api/dashboard/recent-bookings"
+        `${import.meta.env.VITE_API_URL}/api/dashboard/recent-bookings`
       );
 
      if (!response.ok) {
@@ -129,7 +131,8 @@ function AdminDashboard() {
       setTripsError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/trips"
+        // "http://localhost:5000/api/trips"
+        `${import.meta.env.VITE_API_URL}/api/trips`
       );
 
       const data = await response.json();
@@ -191,7 +194,10 @@ setTrips(
       setTripSubmitting(true);
 
       const response = await adminFetch(
-        "http://localhost:5000/api/trips",
+        // "http://localhost:5000/api/trips",
+        `${import.meta.env.VITE_API_URL}/api/trips`,
+        
+        
         {
           method: "POST",
           headers: {
@@ -248,7 +254,7 @@ setTrips(
 
     try {
       const response = await adminFetch(
-        `http://localhost:5000/api/trips/${tripId}/status`,
+        `${import.meta.env.VITE_API_URL}/api/trips/${tripId}/status`,
         {
           method: "PATCH",
           headers: {
