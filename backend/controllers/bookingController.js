@@ -171,4 +171,25 @@ const createBooking = async (req, res) => {
   }
 };
 
-module.exports = { createBooking };
+// Get all bookings for the admin dashboard
+const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .sort({ createdAt: -1 })
+      .populate("tripId", "origin destination travelDate departureTime vehicleType");
+
+    return res.status(200).json({
+      message: "Bookings retrieved successfully.",
+      totalBookings: bookings.length,
+      bookings,
+    });
+  } catch (error) {
+    console.error("Get all bookings error:", error);
+
+    return res.status(500).json({
+      message: "Unable to retrieve bookings.",
+    });
+  }
+};
+
+module.exports = { createBooking, getAllBookings };
