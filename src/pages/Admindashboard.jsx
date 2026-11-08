@@ -38,6 +38,13 @@ function AdminDashboard() {
   });
 
   const [recentBookings, setRecentBookings] = useState([]);
+  // All bookings management
+const [allBookings, setAllBookings] = useState([]);
+const [bookingsLoading, setBookingsLoading] = useState(false);
+const [bookingsError, setBookingsError] = useState("");
+const [bookingSearch, setBookingSearch] = useState("");
+const [paymentFilter, setPaymentFilter] = useState("all");
+const [bookingStatusFilter, setBookingStatusFilter] = useState("all");
   const [loading, setLoading] = useState(true);
   const [recentLoading, setRecentLoading] = useState(true);
   const [error, setError] = useState("");
@@ -122,6 +129,35 @@ function AdminDashboard() {
       setRecentLoading(false);
     }
   }
+
+  // Load all bookings for admin management
+async function fetchAllBookings() {
+  try {
+    setBookingsLoading(true);
+    setBookingsError("");
+
+    const response = await adminFetch(
+      `${import.meta.env.VITE_API_URL}/api/admin/bookings`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to load bookings."
+      );
+    }
+
+    setAllBookings(data.bookings || []);
+  } catch (err) {
+    console.error("All bookings error:", err);
+    setBookingsError(
+      err.message || "Unable to load bookings."
+    );
+  } finally {
+    setBookingsLoading(false);
+  }
+}
 
   // Load scheduled trips from MongoDB
 
@@ -288,15 +324,18 @@ setTrips(
     fetchRecentBookings();
   }, []);
 
-  function handleNavigation(name) {
-    setActiveSection(name);
-    setSidebarOpen(false);
+ function handleNavigation(name) {
+  setActiveSection(name);
+  setSidebarOpen(false);
 
-    if (name === "Trips") {
-      fetchTrips();
-    }
+  if (name === "Trips") {
+    fetchTrips();
   }
 
+  if (name === "Bookings") {
+    fetchAllBookings();
+  }
+}
   function formatDate(dateValue) {
     if (!dateValue) return "—";
 
@@ -350,6 +389,27 @@ setTrips(
 
     return "bg-gray-100 text-gray-700";
   }
+
+  // Filter bookings by search term, payment status and booking status
+const filteredBookings = allBookings.filter((booking) => {
+  const search = bookingSearch.toLowerCase().trim();
+
+  const matchesSearch =
+    !search ||
+    booking.passengerName?.toLowerCase().includes(search) ||
+    booking.passengerPhone?.toLowerCase().includes(search) ||
+    booking.bookingReference?.toLowerCase().includes(search);
+
+  const matchesPayment =
+    paymentFilter === "all" ||
+    booking.paymentStatus === paymentFilter;
+
+  const matchesBookingStatus =
+    bookingStatusFilter === "all" ||
+    booking.bookingStatus === bookingStatusFilter;
+
+  return matchesSearch && matchesPayment && matchesBookingStatus;
+});
 
   const today = new Date();
   const minimumDate = [
@@ -640,6 +700,224 @@ setTrips(
             </section>
           </>
         )}
+
+
+  {/* Booking Management   */}
+
+  
+{activeSection === "Bookings" && (
+  <section className="space-y-6">
+    {/* Page heading */}
+    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900">
+          Bookings Management
+        </h2>
+        <p className="mt-1 text-sm text-gray-500">
+          View and manage passenger booking records.
+        </p>
+      </div>
+
+      <button
+        onClick={fetchAllBookings}
+        disabled={bookingsLoading}
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#123B63] px-4 py-2.5 text-sm font-medium text-white hover:bg-[#0d2d4d] disabled:opacity-60"
+      >
+        <RefreshCw
+          size={16}
+          className={bookingsLoading ? "animate-spin" : ""}
+        />
+        Refresh Bookings
+      </button>
+    </div>
+
+    {/* Booking summary */}
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="rounded-xl bg-white p-5 shadow-sm">
+        <p className="text-sm text-gray-500">Total Bookings</p>
+        <h3 className="mt-2 text-2xl font-bold text-gray-900">
+          {allBookings.length}
+        </h3>
+      </div>
+
+      <div className="rounded-xl bg-white p-5 shadow-sm">
+        <p className="text-sm text-gray-500">Paid Bookings</p>
+        <h3 className="mt-2 text-2xl font-bold text-green-600">
+          {allBookings.filter(
+            (booking) => booking.paymentStatus === "paid"
+          ).length}
+        </h3>
+      </div>
+
+      <div className="rounded-xl bg-white p-5 shadow-sm">
+        <p className="text-sm text-gray-500">Pending Payments</p>
+        <h3 className="mt-2 text-2xl font-bold text-orange-500">
+          {allBookings.filter(
+            (booking) => booking.paymentStatus === "pending"
+          ).length}
+        </h3>
+      </div>
+    </div>
+
+    {/* Search and filters */}
+    <div className="flex flex-col gap-3 rounded-xl bg-white p-5 shadow-sm lg:flex-row">
+      <input
+        type="text"
+        value={bookingSearch}
+        onChange={(e) => setBookingSearch(e.target.value)}
+        placeholder="Search passenger, phone or booking reference..."
+        className="min-w-0 flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none focus:border-[#123B63]"
+      />
+
+      <select
+        value={paymentFilter}
+        onChange={(e) => setPaymentFilter(e.target.value)}
+        className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none focus:border-[#123B63]"
+      >
+        <option value="all">All Payment Statuses</option>
+        <option value="paid">Paid</option>
+        <option value="pending">Pending</option>
+        <option value="failed">Failed</option>
+      </select>
+
+      <select
+        value={bookingStatusFilter}
+        onChange={(e) => setBookingStatusFilter(e.target.value)}
+        className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none focus:border-[#123B63]"
+      >
+        <option value="all">All Booking Statuses</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="pending">Pending</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    </div>
+
+    {/* Error message */}
+    {bookingsError && (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        {bookingsError}
+      </div>
+    )}
+
+    {/* Bookings table */}
+    <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+      <div className="border-b border-gray-100 px-5 py-4">
+        <h3 className="font-bold text-gray-900">
+          All Passenger Bookings
+        </h3>
+        <p className="mt-1 text-sm text-gray-500">
+          Showing {filteredBookings.length} of {allBookings.length} bookings
+        </p>
+      </div>
+
+      {bookingsLoading ? (
+        <div className="p-10 text-center text-sm text-gray-500">
+          Loading bookings...
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1100px] text-left text-sm">
+            <thead className="bg-gray-50 text-xs uppercase text-gray-500">
+              <tr>
+                <th className="px-5 py-4">Passenger</th>
+                <th className="px-5 py-4">Booking Reference</th>
+                <th className="px-5 py-4">Route</th>
+                <th className="px-5 py-4">Travel Date</th>
+                <th className="px-5 py-4">Departure</th>
+                <th className="px-5 py-4">Vehicle</th>
+                <th className="px-5 py-4">Seats</th>
+                <th className="px-5 py-4">Amount</th>
+                <th className="px-5 py-4">Payment</th>
+                <th className="px-5 py-4">Booking</th>
+              </tr>
+            </thead>
+
+            <tbody className="divide-y divide-gray-100">
+              {filteredBookings.map((booking) => (
+                <tr
+                  key={booking._id}
+                  className="hover:bg-gray-50"
+                >
+                  <td className="px-5 py-4">
+                    <p className="font-medium text-gray-900">
+                      {booking.passengerName}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      {booking.passengerPhone}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {booking.passengerEmail}
+                    </p>
+                  </td>
+
+                  <td className="px-5 py-4 font-medium text-gray-700">
+                    {booking.bookingReference}
+                  </td>
+
+                  <td className="px-5 py-4 text-gray-600">
+                    {booking.origin} – {booking.destination}
+                  </td>
+
+                  <td className="px-5 py-4 text-gray-600">
+                    {booking.travelDate
+                      ? formatDate(booking.travelDate)
+                      : "—"}
+                  </td>
+
+                  <td className="px-5 py-4 text-gray-600">
+                    {formatTime(booking.departureTime)}
+                  </td>
+
+                  <td className="px-5 py-4 capitalize text-gray-600">
+                    {booking.vehicleType}
+                  </td>
+
+                  <td className="px-5 py-4 text-gray-600">
+                    {booking.seatNumbers?.length
+                      ? booking.seatNumbers.join(", ")
+                      : "—"}
+                  </td>
+
+                  <td className="px-5 py-4 font-medium text-gray-900">
+                    ₦{Number(booking.totalAmount || 0).toLocaleString("en-NG")}
+                  </td>
+
+                  <td className="px-5 py-4">
+                    <span className={statusClass(booking.paymentStatus)}>
+                      {formatStatus(booking.paymentStatus)}
+                    </span>
+                  </td>
+
+                  <td className="px-5 py-4">
+                    <span className={statusClass(booking.bookingStatus)}>
+                      {formatStatus(booking.bookingStatus)}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+
+              {filteredBookings.length === 0 && (
+                <tr>
+                  <td
+                    colSpan="10"
+                    className="px-5 py-10 text-center text-gray-500"
+                  >
+                    {allBookings.length === 0
+                      ? "No bookings found."
+                      : "No bookings match your search or filters."}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+
+  
 
         {/* TRIPS MANAGEMENT */}
         {activeSection === "Trips" && (
@@ -964,8 +1242,9 @@ setTrips(
         )}
 
         {/* Other sections are not built yet */}
-        {activeSection !== "Dashboard" &&
-          activeSection !== "Trips" && (
+
+        {activeSection === "Fleet" || activeSection === "Payments" ?  (
+            
             <section className="rounded-xl bg-white p-8 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900">
                 {activeSection} Management
@@ -981,6 +1260,7 @@ setTrips(
               </button>
             </section>
           )}
+          
       </main>
     </div>
   );
