@@ -330,6 +330,7 @@ setTrips(
 
   if (name === "Trips") {
     fetchTrips();
+
   }
 
   if (name === "Bookings") {
@@ -702,9 +703,7 @@ const filteredBookings = allBookings.filter((booking) => {
         )}
 
 
-  {/* Booking Management   */}
-
-  
+  {/* Booking Management   */} 
 {activeSection === "Bookings" && (
   <section className="space-y-6">
     {/* Page heading */}
@@ -1243,7 +1242,7 @@ const filteredBookings = allBookings.filter((booking) => {
 
         {/* Other sections are not built yet */}
 
-        {activeSection === "Fleet" || activeSection === "Payments" ?  (
+        {activeSection === "Fleet" || activeSection === "Payments" &&  (
             
             <section className="rounded-xl bg-white p-8 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900">
