@@ -480,13 +480,15 @@ const filteredBookings = allBookings.filter((booking) => {
               : `${activeSection} Management`}
           </h2>
 
-          <p className="mt-2 text-gray-600">
-            {activeSection === "Dashboard"
-              ? "Welcome back. Here's an overview of your transport operations."
-              : activeSection === "Trips"
-                ? "Schedule and manage Kaduna–Abuja departures."
-                : `${activeSection} tools will be added in a later step.`}
-          </p>
+        <p className="mt-2 text-gray-600">
+  {activeSection === "Dashboard"
+    ? "Welcome back. Here's an overview of your transport operations."
+    : activeSection === "Trips"
+      ? "Schedule and manage Kaduna–Abuja departures."
+      : activeSection === "Bookings"
+        ? "View, search and manage passenger booking records."
+        : `${activeSection} tools will be added in a later step.`}
+</p>
         </header>
 
         {/* DASHBOARD OVERVIEW */}
@@ -710,11 +712,11 @@ const filteredBookings = allBookings.filter((booking) => {
     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
       <div>
         <h2 className="text-2xl font-bold text-gray-900">
-          Bookings Management
+          Bookings 
         </h2>
-        <p className="mt-1 text-sm text-gray-500">
+        {/* <p className="mt-1 text-sm text-gray-500">
           View and manage passenger booking records.
-        </p>
+        </p> */}
       </div>
 
       <button

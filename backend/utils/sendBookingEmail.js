@@ -1,24 +1,49 @@
 
 const nodemailer = require("nodemailer");
 
-async function sendBookingEmail(booking) {
-  // Create a temporary test email account.
-  const testAccount = await nodemailer.createTestAccount();
+// Connect to Hostinger SMTP.
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
-  // Configure the email transporter.
-  const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
-    },
-  });
+// Format booking details.
+function getBookingDetails(booking) {
+  const travelDate = new Date(booking.travelDate).toLocaleDateString(
+    "en-NG",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }
+  );
 
-  // Send the booking confirmation email.
-  const info = await transporter.sendMail({
-    from: '"Logistikus Transport Services" <bookings@example.com>',
+  return `
+Booking Reference: ${booking.bookingReference}
+Passenger: ${booking.passengerName}
+Passenger Email: ${booking.passengerEmail}
+Passenger Phone: ${booking.passengerPhone}
+Route: ${booking.origin} to ${booking.destination}
+Travel Date: ${travelDate}
+Departure Time: ${booking.departureTime}
+Vehicle Type: ${booking.vehicleType}
+Passengers: ${booking.numberOfPassengers}
+Assigned Seats: ${booking.seatNumbers?.join(", ") || "Pending"}
+Amount Paid: ₦${Number(booking.totalAmount).toLocaleString("en-NG")}
+Payment Status: ${booking.paymentStatus}
+`;
+}
+
+// Send confirmation to passenger.
+async function sendPassengerEmail(booking) {
+  return transporter.sendMail({
+    from: process.env.EMAIL_FROM,
     to: booking.passengerEmail,
     subject: "Your Logistikus Booking Confirmation",
     text: `
@@ -26,24 +51,32 @@ Hello ${booking.passengerName},
 
 Your payment has been confirmed successfully.
 
-Booking reference: ${booking.bookingReference}
-Route: ${booking.origin} to ${booking.destination}
-Travel date: ${new Date(booking.travelDate).toLocaleDateString("en-NG", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "UTC",
-    })}
-Passengers: ${booking.numberOfPassengers}
-Assigned seats: ${booking.seatNumbers?.join(", ") || "Pending"}
-Amount paid: ₦${Number(booking.totalAmount).toLocaleString("en-NG")}
+${getBookingDetails(booking)}
 
 Thank you for choosing Logistikus Transport Services.
-    `,
-  });
 
-  // Print the temporary email preview link.
-  console.log("Test email preview:", nodemailer.getTestMessageUrl(info));
+We look forward to having you on board.
+`,
+  });
 }
 
-module.exports = sendBookingEmail;
+// Send notification to company.
+async function sendAdminEmail(booking) {
+  return transporter.sendMail({
+    from: process.env.EMAIL_FROM,
+    to: process.env.SMTP_USER,
+    subject: `New Paid Booking - ${booking.bookingReference}`,
+    text: `
+A new passenger booking has been successfully paid for.
+
+${getBookingDetails(booking)}
+
+Please check your administration dashboard for more details.
+`,
+  });
+}
+
+module.exports = {
+  sendPassengerEmail,
+  sendAdminEmail,
+};

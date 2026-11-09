@@ -3,9 +3,6 @@ const axios = require("axios");
 const Booking = require("../models/Booking");
 const sendBookingEmail = require("../utils/sendBookingEmail");
 
-
-
-
 async function initializePayment(req, res) {
   try {
     const { bookingId } = req.body;
@@ -39,14 +36,7 @@ async function initializePayment(req, res) {
       });
     }
 
-    // Use the total amount already calculated and saved
-// by the booking controller. Paystack expects kobo.
-const amount = Math.round(booking.totalAmount * 100);
-
-      console.log(
-  "Paystack callback URL:",
-  "http://localhost:5174/payment-callback"
-);
+    const amount = Math.round(booking.totalAmount * 100);
 
     const response = await axios.post(
       "https://api.paystack.co/transaction/initialize",
@@ -54,9 +44,8 @@ const amount = Math.round(booking.totalAmount * 100);
         email: booking.passengerEmail,
         amount,
         currency: "NGN",
-        callback_url: "https://logistikus-transport.vercel.app/payment-callback",
-        
-        // "http://localhost:5174/payment-callback",
+        callback_url:
+          "https://logistikus-transport.vercel.app/payment-callback",
         metadata: {
           bookingId: booking._id.toString(),
           bookingReference: booking.bookingReference,
@@ -87,7 +76,6 @@ const amount = Math.round(booking.totalAmount * 100);
   }
 }
 
-
 async function verifyPayment(req, res) {
   try {
     const { reference } = req.params;
@@ -98,7 +86,7 @@ async function verifyPayment(req, res) {
       });
     }
 
-    // Ask Paystack to verify the transaction.
+    // Verify the transaction directly with Paystack.
     const response = await axios.get(
       `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
       {
@@ -110,14 +98,13 @@ async function verifyPayment(req, res) {
 
     const transaction = response.data.data;
 
-    // Confirm that Paystack reports a successful payment.
     if (transaction.status !== "success") {
       return res.status(400).json({
         message: "Payment has not been completed successfully.",
       });
     }
 
-    // Find the booking associated with this transaction.
+    // Find the associated booking.
     const bookingId = transaction.metadata?.bookingId;
 
     if (!bookingId) {
@@ -134,8 +121,10 @@ async function verifyPayment(req, res) {
       });
     }
 
-    // Confirm the amount and currency match the saved booking.
-    const expectedAmount = booking.totalAmount * 100;
+    // Validate amount and currency.
+    const expectedAmount = Math.round(
+      booking.totalAmount * 100
+    );
 
     if (
       Number(transaction.amount) !== expectedAmount ||
@@ -146,7 +135,7 @@ async function verifyPayment(req, res) {
       });
     }
 
-    // Confirm this transaction belongs to the expected booking.
+    // Validate booking reference.
     if (
       transaction.metadata?.bookingReference !==
       booking.bookingReference
@@ -156,30 +145,53 @@ async function verifyPayment(req, res) {
       });
     }
 
-    // Mark the booking as paid only after successful verification.
+    // Mark payment as successful.
     booking.paymentStatus = "paid";
     booking.bookingStatus = "confirmed";
-await booking.save();
 
-if (!booking.confirmationEmailSent) {
-  console.log("Sending booking confirmation email...");
+    // Store the verified Paystack reference.
+    booking.paystackReference = reference;
 
-  try {
-    await sendBookingEmail(booking);
-
-    booking.confirmationEmailSent = true;
     await booking.save();
 
-    console.log("Booking confirmation email sent successfully.");
-  } catch (emailError) {
-    console.error(
-      "Booking confirmation email failed:",
-      emailError.message
-    );
-  }
-} else {
-  console.log("Confirmation email already sent. Skipping duplicate.");
-}
+    // Send passenger confirmation independently.
+    if (!booking.passengerConfirmationEmailSent) {
+      try {
+        console.log("Sending passenger confirmation email...");
+
+        await sendBookingEmail.sendPassengerEmail(booking);
+
+        booking.passengerConfirmationEmailSent = true;
+        await booking.save();
+
+        console.log("Passenger confirmation email sent.");
+      } catch (emailError) {
+        console.error(
+          "Passenger email failed:",
+          emailError.message
+        );
+      }
+    }
+
+    // Send company notification independently.
+    if (!booking.adminNotificationEmailSent) {
+      try {
+        console.log("Sending company booking notification...");
+
+        await sendBookingEmail.sendAdminEmail(booking);
+
+        booking.adminNotificationEmailSent = true;
+        await booking.save();
+
+        console.log("Company notification email sent.");
+      } catch (emailError) {
+        console.error(
+          "Company notification failed:",
+          emailError.message
+        );
+      }
+    }
+
     return res.status(200).json({
       message: "Payment verified successfully.",
       booking: {
@@ -187,6 +199,8 @@ if (!booking.confirmationEmailSent) {
         origin: booking.origin,
         destination: booking.destination,
         travelDate: booking.travelDate,
+        departureTime: booking.departureTime,
+        vehicleType: booking.vehicleType,
         numberOfPassengers: booking.numberOfPassengers,
         seatNumbers: booking.seatNumbers,
         totalAmount: booking.totalAmount,
@@ -209,6 +223,7 @@ if (!booking.confirmationEmailSent) {
   }
 }
 
-
-
-module.exports = { initializePayment, verifyPayment };
+module.exports = {
+  initializePayment,
+  verifyPayment,
+};

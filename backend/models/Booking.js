@@ -87,10 +87,15 @@ const bookingSchema = new mongoose.Schema(
       default: "pending",
     },
 
-    confirmationEmailSent: {
-      type: Boolean,
-      default: false,
-    },
+    passengerConfirmationEmailSent: {
+  type: Boolean,
+  default: false,
+},
+
+adminNotificationEmailSent: {
+  type: Boolean,
+  default: false,
+},
 
     paystackReference: {
       type: String,
