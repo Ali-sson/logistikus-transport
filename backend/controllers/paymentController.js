@@ -45,7 +45,7 @@ async function initializePayment(req, res) {
         amount,
         currency: "NGN",
         callback_url:
-          "https://logistikus-transport.vercel.app/payment-callback",
+         "https://logistikustravels.com/payment-callback",
         metadata: {
           bookingId: booking._id.toString(),
           bookingReference: booking.bookingReference,
