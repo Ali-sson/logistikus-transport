@@ -1,16 +1,5 @@
 
-const nodemailer = require("nodemailer");
-
-// Connect to Hostinger SMTP.
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+// Send emails using Resend API.
 
 // Format booking details.
 function getBookingDetails(booking) {
@@ -40,10 +29,44 @@ Payment Status: ${booking.paymentStatus}
 `;
 }
 
+// Send an email through Resend.
+async function sendEmail({ to, subject, text }) {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured.");
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from:
+        process.env.EMAIL_FROM ||
+        "Logistikus Transport Services <info@logistikustravels.com>",
+      to: [to],
+      subject,
+      text,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      result.message || `Resend email failed with status ${response.status}`
+    );
+  }
+
+  console.log("Resend email accepted:", result.id);
+
+  return result;
+}
+
 // Send confirmation to passenger.
 async function sendPassengerEmail(booking) {
-  return transporter.sendMail({
-    from: process.env.EMAIL_FROM,
+  return sendEmail({
     to: booking.passengerEmail,
     subject: "Your Logistikus Booking Confirmation",
     text: `
@@ -62,9 +85,8 @@ We look forward to having you on board.
 
 // Send notification to company.
 async function sendAdminEmail(booking) {
-  return transporter.sendMail({
-    from: process.env.EMAIL_FROM,
-    to: process.env.SMTP_USER,
+  return sendEmail({
+    to: "info@logistikustravels.com",
     subject: `New Paid Booking - ${booking.bookingReference}`,
     text: `
 A new passenger booking has been successfully paid for.
