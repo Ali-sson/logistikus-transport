@@ -2,9 +2,11 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import BookingForm from "../components/BookingForm";
-// import WhyChooseUs from "../components/WhyChooseUs";
+import WhyChooseUs from "../components/WhyChooseUs";
 // import RouteInfo from "../components/RouteInfo";
 import Footer from "../components/Footer";
+import TravelComfort from "../components/TravelComfort";
+import Terminals from "../components/Terminals";
 
 function Home() {
   return (
@@ -14,8 +16,10 @@ function Home() {
       <main>
         <Hero />
         <BookingForm />
-        {/* <WhyChooseUs />
-        <RouteInfo /> */}
+        <WhyChooseUs />
+        <TravelComfort/>
+        {/* <RouteInfo /> */}
+        <Terminals />
       </main>
 
       <Footer />

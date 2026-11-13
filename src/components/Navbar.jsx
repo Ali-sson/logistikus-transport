@@ -6,8 +6,8 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Home", href: "#home" },
-    { label: "About Us", href: "#about" },
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
     { label: "Our Services", href: "#services" },
     // { label: "Rates & Schedule", href: "#schedule" },
     { label: "Contact", href: "#contact" },

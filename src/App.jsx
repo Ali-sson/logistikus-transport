@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/Home";
+import About from "./pages/About";
 import BookingDetails from "./pages/BookingDetails";
 import BookingReview from "./pages/BookingReview";
 import Payment from "./pages/Payment";
@@ -31,6 +32,8 @@ function App() {
       <Routes>
         {/* Homepage */}
         <Route path="/" element={<Home />} />
+        {/* About Page */}
+        <Route path="/about" element={<About />} />
 
         {/* Passenger details page */}
         <Route

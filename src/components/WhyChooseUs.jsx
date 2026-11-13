@@ -1,84 +1,86 @@
 
 import {
   ShieldCheck,
-  Armchair,
-  CalendarCheck,
+  CarFront,
+  Clock,
   Headset,
+  CreditCard,
 } from "lucide-react";
 
 const benefits = [
   {
     icon: ShieldCheck,
-    title: "Safe and Reliable",
-    description:
-      "We aim to provide a dependable travel experience from Kaduna to Abuja.",
+    title: "Safe & Secure",
+    description: "Your safety is our priority.",
   },
   {
-    icon: Armchair,
+    icon: CarFront,
     title: "Comfortable Travel",
-    description:
-      "Enjoy a comfortable journey with our passenger-focused transport service.",
+    description: "Clean, reliable and well-maintained vehicles.",
   },
   {
-    icon: CalendarCheck,
-    title: "Easy Booking",
-    description:
-      "Reserve your trip online or visit our terminal to make a booking.",
+    icon: Clock,
+    title: "On-Time Departure",
+    description: "We value your time.",
   },
   {
     icon: Headset,
-    title: "Customer Support",
-    description:
-      "Our team is available to help with your booking and travel enquiries.",
+    title: "24/7 Support",
+    description: "We're always here to help.",
+  },
+  {
+    icon: CreditCard,
+    title: "Easy Booking & Payments",
+    description: "Book and pay with ease.",
   },
 ];
 
-function WhyChooseUs() {
+const WhyChooseUs = () => {
   return (
-    <section className="bg-brand-light px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-teal">
-            Why Travel With Us
-          </p>
+    <section className="bg-[#F8FAFC] py-14 md:py-20">
+      <div className="max-w-7xl mx-auto px-5">
 
-          <h2 className="mt-3 text-3xl font-extrabold text-brand-blue sm:text-4xl">
-            A Better Way to Travel
-          </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
 
-          <p className="mt-4 leading-7 text-gray-600">
-            We make travelling between Kaduna and Abuja
-            straightforward, convenient, and comfortable.
-          </p>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((benefit) => {
-            const Icon = benefit.icon;
+          {benefits.map((item, index) => {
+            const Icon = item.icon;
 
             return (
               <div
-                key={benefit.title}
-                className="rounded-2xl border border-gray-100 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                key={index}
+                className={`flex flex-col items-center text-center px-4
+                ${index !== benefits.length - 1
+                  ? "lg:border-r lg:border-blue-200"
+                  : ""
+                }`}
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-teal/10 text-brand-teal">
-                  <Icon size={28} />
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-full bg-[#0A3D78]
+                  flex items-center justify-center mb-4">
+                  <Icon
+                    size={26}
+                    strokeWidth={1.8}
+                    className="text-white"
+                  />
                 </div>
 
-                <h3 className="mt-5 text-lg font-bold text-brand-blue">
-                  {benefit.title}
+                {/* Title */}
+                <h3 className="text-base font-bold text-[#0A3D78] mb-2">
+                  {item.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-6 text-gray-600">
-                  {benefit.description}
+                {/* Description */}
+                <p className="text-sm text-slate-600 leading-relaxed max-w-[220px]">
+                  {item.description}
                 </p>
               </div>
             );
           })}
+
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default WhyChooseUs;
