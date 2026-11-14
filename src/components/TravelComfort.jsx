@@ -85,8 +85,8 @@ const TravelComfort = () => {
 
           {/* Right Features */}
           <div className="lg:col-span-3 
-            grid-cols-1 sm:grid-cols-3 gap-6
-            lg:gap-8 mt-4 lg:mt-0 hidden md:grid">
+            grid-cols-3 sm:grid-cols-3 gap-6
+            lg:gap-8 mt-4 lg:mt-0 grid">
 
             {features.map((feature, index) => {
               const Icon = feature.icon;
