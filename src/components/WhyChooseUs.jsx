@@ -40,7 +40,7 @@ const WhyChooseUs = () => {
     <section className="bg-[#F8FAFC] py-14 md:py-20">
       <div className="max-w-7xl mx-auto px-5">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8">
 
           {benefits.map((item, index) => {
             const Icon = item.icon;
@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
                 }`}
               >
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-full bg-[#0A3D78]
+                <div className="w-14 h-14 rounded-full bg-brand-teal
                   flex items-center justify-center mb-4">
                   <Icon
                     size={26}

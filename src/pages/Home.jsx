@@ -6,7 +6,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 // import RouteInfo from "../components/RouteInfo";
 import Footer from "../components/Footer";
 import TravelComfort from "../components/TravelComfort";
-import Terminals from "../components/Terminals";
+// import Terminals from "../components/Terminals";
 
 function Home() {
   return (
@@ -19,7 +19,7 @@ function Home() {
         <WhyChooseUs />
         <TravelComfort/>
         {/* <RouteInfo /> */}
-        <Terminals />
+        {/* <Terminals /> */}
       </main>
 
       <Footer />

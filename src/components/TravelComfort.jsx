@@ -84,9 +84,9 @@ const TravelComfort = () => {
           </div>
 
           {/* Right Features */}
-          <div className="lg:col-span-3 grid
+          <div className="lg:col-span-3 
             grid-cols-1 sm:grid-cols-3 gap-6
-            lg:gap-8 mt-4 lg:mt-0">
+            lg:gap-8 mt-4 lg:mt-0 hidden md:grid">
 
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -94,8 +94,8 @@ const TravelComfort = () => {
               return (
                 <div
                   key={index}
-                  className="text-white flex flex-col
-                  items-start gap-3"
+                  className="text-white flex-col
+                  items-start gap-3 md:flex"
                 >
                   <div className="w-11 h-11 rounded-xl
                     bg-white/10 border border-white/20
