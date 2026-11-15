@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import PageHero from "../components/PageHero";
 import ServiceSection from "../components/ServiceSection";
+import seater from "../assets/seater.png"
 
 function About() {
   return (
@@ -11,7 +12,7 @@ function About() {
       <PageHero
         title="About Us"
         subtitle="We are committed to delivering reliable transportation, logistics, and travel solutions that connect people, businesses, and opportunities."
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage={seater}
       />
 
     <AboutIntro/>
