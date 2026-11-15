@@ -15,6 +15,7 @@ import PaymentCallback from "./pages/PaymentCallback";
 import AdminDashboard from "./pages/Admindashboard";
 import TestTrips from "./TestTrips";
 import AdminLogin from "./pages/AdminLogin";
+import ScrollToHash from "./components/ScrollToHash";
 
 function ProtectedAdminRoute({ children }) {
   const token = sessionStorage.getItem("adminToken");
@@ -29,11 +30,14 @@ function ProtectedAdminRoute({ children }) {
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToHash/>
       <Routes>
         {/* Homepage */}
         <Route path="/" element={<Home />} />
         {/* About Page */}
         <Route path="/about" element={<About />} />
+
+  
 
         {/* Passenger details page */}
         <Route

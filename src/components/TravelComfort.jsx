@@ -100,7 +100,7 @@ const TravelComfort = () => {
                   <div className="w-11 h-11 rounded-xl
                     bg-white/10 border border-white/20
                     flex items-center justify-center
-                    backdrop-blur-sm">
+                    backdrop-blur-sm mb-2">
                     <Icon
                       size={23}
                       className="text-cyan-300"
@@ -113,7 +113,7 @@ const TravelComfort = () => {
                     </h3>
 
                     <p className="text-xs text-blue-100
-                      leading-relaxed max-w-[160px]">
+                      leading-relaxed max-w-[160px] hidden md:block"> 
                       {feature.description}
                     </p>
                   </div>
