@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X, UserRound } from "lucide-react";
-import logo from "../assets/Logo.png";
+import logo from "../assets/Logo2.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ function Navbar() {
     { label: "About Us", href: "/about" },
     { label: "Our Services", href: "/about/#services" },
     // { label: "Rates & Schedule", href: "#schedule" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -20,7 +20,7 @@ function Navbar() {
           <img
             src={logo}
             alt="Logistikus Travels"
-            className="h-14 w-auto object-contain sm:h-20"
+            className="h-20 w-autoobject-contain"
           />
         </a>
 

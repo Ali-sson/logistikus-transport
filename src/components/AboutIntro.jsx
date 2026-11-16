@@ -63,7 +63,7 @@ const AboutIntro = () => {
 
           {/* Our Promise */}
           <div className="bg-white border border-[#DCE2F0] rounded-3xl p-7 md:p-8">
-            <h2 className="text-[#05708C] text-sm md:text-2xl font-bold uppercase mb-3 font-poppins">
+            <h2 className="text-[#05708C] text-2xl font-bold uppercase mb-3 font-poppins">
               Why Choose Us
             </h2>
 
@@ -74,7 +74,7 @@ const AboutIntro = () => {
                     ✓
                   </span>
 
-                  <p className="text-[#3e4244] text-base leading-7">
+                  <p className="text-[#536080] text-base leading-7">
                     <strong>{promise.title}</strong>{" "}
                     {promise.description}
                   </p>
@@ -91,7 +91,7 @@ const AboutIntro = () => {
               key={index}
               className="bg-white border border-[#DCE2F0] rounded-2xl py-5 px-4 text-center hover:shadow-md transition duration-300"
             >
-              <h3 className="text-[#05708C] text-5xl md:text-6xl font-extrabold font-['Oswald']">
+              <h3 className="text-[#05708C] text-4xl font-bold font-poppins">
                 {stat.number}
               </h3>
 

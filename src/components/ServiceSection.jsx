@@ -68,7 +68,7 @@ const ServiceSection = () => {
           </span>
 
           <h2 className="text-[#064A6F] text-3xl md:text-4xl font-bold mt-3 mb-5">
-            Our Travel Services
+            Our Services
           </h2>
 
           <p className="text-gray-600 text-base leading-relaxed">

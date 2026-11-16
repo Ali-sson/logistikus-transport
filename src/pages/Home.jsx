@@ -6,6 +6,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 // import RouteInfo from "../components/RouteInfo";
 import Footer from "../components/Footer";
 import TravelComfort from "../components/TravelComfort";
+import Testimonials from "../components/Testimonials";
 // import Terminals from "../components/Terminals";
 
 function Home() {
@@ -21,6 +22,8 @@ function Home() {
         {/* <RouteInfo /> */}
         {/* <Terminals /> */}
       </main>
+
+      <Testimonials/>
 
       <Footer />
     </div>

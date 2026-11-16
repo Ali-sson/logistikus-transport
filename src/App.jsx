@@ -8,6 +8,7 @@ import {
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import BookingDetails from "./pages/BookingDetails";
 import BookingReview from "./pages/BookingReview";
 import Payment from "./pages/Payment";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* About Page */}
         <Route path="/about" element={<About />} />
+         <Route path="/contact" element={<Contact />} />
 
   
 

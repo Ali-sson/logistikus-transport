@@ -19,7 +19,7 @@ function Hero() {
             Safe. Comfortable. Reliable.
           </p>
 <h1 className="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-  Your Journey
+  Safe Journeys
   <span className="block">
     Starts <span className="text-cyan-300">Here.</span>
   </span>
@@ -39,7 +39,7 @@ function Hero() {
             </a>
 
             <a
-              href="#schedule"
+              href="/about"
               className="inline-flex items-center gap-2 rounded-lg border border-white/70 bg-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-brand-blue"
             >
               About Us 

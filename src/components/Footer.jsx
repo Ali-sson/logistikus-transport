@@ -11,7 +11,7 @@ import logo from "../assets/Logo2.png";
 function Footer() {
   return (
     <footer
-      id="contact"
+     
       className="bg-brand-blue text-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
@@ -54,23 +54,23 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-cyan-300">
+                <a href="/about" className="hover:text-cyan-300">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-300">
+                <a href="/about#services" className="hover:text-cyan-300">
                   Our Services
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#schedule" className="hover:text-cyan-300">
                   Route Information
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="#booking" className="hover:text-cyan-300">
-                  Book a Trip
+                  Contact Us
                 </a>
               </li>
             </ul>

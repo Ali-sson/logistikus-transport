@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import PageHero from "../components/PageHero";
 import ServiceSection from "../components/ServiceSection";
 import seater from "../assets/seater.png"
+import TravelComfort from "../components/TravelComfort";
+import Testimonials from "../components/Testimonials";
 
 function About() {
   return (
@@ -18,6 +20,10 @@ function About() {
     <AboutIntro/>
 
     <ServiceSection/>
+
+    <TravelComfort/>
+
+    <Testimonials/>
 
     <Footer/>
     
