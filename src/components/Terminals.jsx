@@ -216,7 +216,7 @@ ${message}
           </div>
 
           {/* RIGHT: Request Form */}
-          <div className="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-6 md:p-10 shadow-sm">
+          <div id="form" className="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-6 md:p-10 shadow-sm">
 
             <div className="mb-8">
               <span className="text-[#05708C] text-xs font-bold uppercase tracking-widest">

@@ -13,7 +13,7 @@ function About() {
     <Navbar />
       <PageHero
         title="About Us"
-        subtitle="We are committed to delivering reliable transportation, logistics, and travel solutions that connect people, businesses, and opportunities."
+        subtitle="We are committed to delivering reliable transportation, and travel solutions that connect people, businesses, and opportunities."
         backgroundImage={seater}
       />
 

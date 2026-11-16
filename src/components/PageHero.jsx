@@ -6,7 +6,7 @@ const PageHero = ({ title, subtitle, backgroundImage }) => {
 
   return (
     <section
-      className="relative min-h-[350px] md:min-h-[450px] w-full bg-cover bg-center flex items-center"
+      className="relative min-h-[250px] md:min-h-[300px] w-full bg-cover bg-center flex items-center"
       style={{
         backgroundImage: `linear-gradient(to right, rgba(5, 20, 40, 0.95), rgba(5, 20, 40, 0.5), transparent), url(${heroImage})`,
       }}

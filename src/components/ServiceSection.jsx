@@ -17,14 +17,14 @@ const servicesection = [
     title: "Interstate Luxury Travel",
     description:
       "Enjoy comfortable and reliable journeys between Kaduna and Abuja with our well-maintained vehicles and professional drivers.",
-    link: "/booking",
+    link: "/#booking",
   },
   {
     icon: PlaneTakeoff,
     title: "Airport Pick-up & Drop-off",
     description:
       "Enjoy stress-free airport transfers with timely pick-ups and drop-offs designed around your flight schedule.",
-    link: "/booking",
+    link: "/contact",
   },
   {
     icon: TrainFront,

@@ -29,11 +29,11 @@ const Testimonials = () => {
 
         {/* Heading */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <p className="text-[#006080] font-semibold uppercase tracking-widest text-sm mb-3">
+          <p className="text-[#05708C] font-semibold uppercase tracking-widest text-sm mb-3">
             Testimonials
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-[#003B5C] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#064A6F] mb-4">
             What Our Customers Say
           </h2>
 
@@ -55,7 +55,7 @@ const Testimonials = () => {
               <div className="flex justify-between items-center mb-6">
                 <Quote size={35} className="text-[#006080]/30" />
 
-                <div className="flex gap-1 text-[#FBBF24]">
+                <div className="flex gap-1 text-[#05708C]">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
                       key={star}
@@ -73,7 +73,7 @@ const Testimonials = () => {
 
               {/* Customer */}
               <div className="flex items-center gap-4 border-t pt-5">
-                <div className="w-12 h-12 rounded-full bg-[#003B5C] flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-[#05708C] flex items-center justify-center">
                   <UserRound className="text-white" size={25} />
                 </div>
 
