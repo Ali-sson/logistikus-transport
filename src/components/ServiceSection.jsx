@@ -24,35 +24,35 @@ const servicesection = [
     title: "Airport Pick-up & Drop-off",
     description:
       "Enjoy stress-free airport transfers with timely pick-ups and drop-offs designed around your flight schedule.",
-    link: "/contact",
+    link: "/contact#form",
   },
   {
     icon: TrainFront,
     title: "Train Station Transfers",
     description:
       "Get to and from train stations conveniently with dependable transportation that keeps your journey smooth.",
-    link: "/booking",
+    link: "/contact#form",
   },
   {
     icon: Clock,
     title: "Hourly Car Hire",
     description:
       "Hire a private vehicle by the hour for meetings, errands, appointments and other personal engagements.",
-    link: "/booking",
+    link: "/contact#form",
   },
   {
     icon: CalendarDays,
     title: "Full-Day Car Hire",
     description:
       "Enjoy the convenience of a dedicated vehicle and professional driver throughout your busy day.",
-    link: "/booking",
+    link: "/contact#form",
   },
   {
     icon: BriefcaseBusiness,
     title: "Private & Corporate",
     description:
       "Reliable transportation solutions for individuals, executives, organisations and corporate events.",
-    link: "/booking",
+    link: "/contact#form",
   },
 ];
 
