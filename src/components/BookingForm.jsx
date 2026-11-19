@@ -176,7 +176,7 @@ function BookingForm() {
   return (
     <section
       id="booking"
-      className="relative z-20 mx-auto -mt-10 max-w-7xl px-4 pb-12 sm:px-6 lg:px-8"
+      className="relative z-20 mx-auto mt-[25%] max-w-7xl px-4 pb-12 sm:px-6 lg:px-8"
     >
       <div className="rounded-2xl bg-white p-5 shadow-xl ring-1 ring-gray-100 md:p-7">
         <div className="mb-6">
