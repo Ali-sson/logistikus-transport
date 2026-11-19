@@ -6,7 +6,7 @@ function Hero() {
   return (
     <section
       id="home"
-      className="isolate min-h-[540px] overflow-hidden bg-brand-blue bg-cover bg-center fixed top-0 left-0 w-full z-100"
+      className="relative isolate min-h-[540px] overflow-hidden bg-brand-blue bg-cover bg-center"
       style={{
           backgroundImage: `url(${heroImage})`,
       }}
