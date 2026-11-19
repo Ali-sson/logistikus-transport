@@ -79,7 +79,7 @@ function Navbar() {
             ))}
 
             <a
-              href="#booking"
+              href="/home#booking"
               onClick={() => setMenuOpen(false)}
               className="rounded-lg bg-brand-teal px-4 py-3 text-center font-semibold text-white"
             >
