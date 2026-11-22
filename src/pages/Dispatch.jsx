@@ -11,28 +11,17 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// =====================================
-// WEBSITE CONFIGURATION
-// =====================================
+// ========================================
+// LOGISTIKUS CONFIGURATION
+// ========================================
 
-const SITE = {
-  name: "Logistikus Travels",
-  location: "Kaduna",
-  whatsapp: "2347038021220",
-};
+const WHATSAPP_NUMBER = "2347038021220";
 
-// Always use the official WhatsApp click-to-chat URL
-const testMessage = "Hello Logistikus Travels";
+const SITE_NAME = "Logistikus Travels";
 
-const testUrl =
-  `https://wa.me/2347038021220?text=${encodeURIComponent(testMessage)}`;
-
-console.log("MY GENERATED URL:", testUrl);
-
-window.open(testUrl, "_blank");
-// =====================================
+// ========================================
 // DISPATCH COMPONENT
-// =====================================
+// ========================================
 
 function Dispatch() {
   const [form, setForm] = useState({
@@ -58,9 +47,9 @@ function Dispatch() {
     String(today.getDate()).padStart(2, "0"),
   ].join("-");
 
-  // =====================================
+  // ========================================
   // HANDLE INPUT CHANGES
-  // =====================================
+  // ========================================
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,21 +60,19 @@ function Dispatch() {
     }));
   };
 
-  // =====================================
-  // VALIDATE NIGERIAN PHONE NUMBERS
-  // =====================================
+  // ========================================
+  // VALIDATE PHONE NUMBERS
+  // ========================================
 
   const validatePhone = (phone) => {
-    const cleanedPhone = phone.replace(/[\s-]/g, "");
+    const cleaned = phone.replace(/[\s-]/g, "");
 
-    const phoneRegex = /^(\+234|234|0)[789][01]\d{8}$/;
-
-    return phoneRegex.test(cleanedPhone);
+    return /^(\+234|234|0)[789][01]\d{8}$/.test(cleaned);
   };
 
-  // =====================================
+  // ========================================
   // HANDLE FORM SUBMISSION
-  // =====================================
+  // ========================================
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,12 +91,12 @@ function Dispatch() {
       "pickupTime",
     ];
 
-    const isIncomplete = requiredFields.some(
+    const incomplete = requiredFields.some(
       (field) => !String(form[field]).trim()
     );
 
-    if (isIncomplete) {
-      alert("Please fill in all required fields.");
+    if (incomplete) {
+      alert("Please complete all required fields.");
       return;
     }
 
@@ -125,68 +112,75 @@ function Dispatch() {
       return;
     }
 
-    // Validate pickup date and time
-    const selectedPickup = new Date(
+    // Validate pickup schedule
+    const pickupDateTime = new Date(
       `${form.pickupDate}T${form.pickupTime}:00`
     );
 
     if (
-      Number.isNaN(selectedPickup.getTime()) ||
-      selectedPickup <= new Date()
+      Number.isNaN(pickupDateTime.getTime()) ||
+      pickupDateTime <= new Date()
     ) {
       alert("Please select a future pickup date and time.");
       return;
     }
 
-    // =====================================
-    // CREATE WHATSAPP MESSAGE
-    // =====================================
+    // ========================================
+    // GENERATE DELIVERY MESSAGE
+    // ========================================
 
-    const message = [
-      "*NEW DISPATCH DELIVERY REQUEST*",
-      `*${SITE.name} - ${SITE.location}*`,
-      "",
-      "*SENDER INFORMATION*",
-      `Name: ${form.senderName.trim()}`,
-      `Phone: ${form.senderPhone.trim()}`,
-      "",
-      "*PICKUP INFORMATION*",
-      `Pickup Address: ${form.pickupAddress.trim()}`,
-      `Landmark: ${form.pickupLandmark.trim() || "Not provided"}`,
-      "",
-      "*RECIPIENT INFORMATION*",
-      `Name: ${form.recipientName.trim()}`,
-      `Phone: ${form.recipientPhone.trim()}`,
-      `Delivery Address: ${form.deliveryAddress.trim()}`,
-      "",
-      "*PACKAGE DETAILS*",
-      `Package Type: ${form.packageType}`,
-      `Description: ${form.packageDescription.trim()}`,
-      "",
-      "*PICKUP SCHEDULE*",
-      `Date: ${form.pickupDate}`,
-      `Time: ${form.pickupTime}`,
-      "",
-      "*DELIVERY CONFIRMATION*",
-      "Please review this request and confirm the delivery fee and rider availability.",
-    ].join("\n");
+    const message = `
+*NEW DISPATCH DELIVERY REQUEST*
+*${SITE_NAME} - Kaduna*
 
-    // =====================================
-    // GENERATE WHATSAPP URL
-    // =====================================
-// Generate WhatsApp URL
-const whatsappUrl = `https://wa.me/2347038021220?text=${encodeURIComponent(message)}`;
+*SENDER INFORMATION*
+Name: ${form.senderName.trim()}
+Phone: ${form.senderPhone.trim()}
 
-// Log the generated URL
-console.log("FINAL URL:", whatsappUrl);
+*PICKUP INFORMATION*
+Pickup Address: ${form.pickupAddress.trim()}
+Landmark: ${form.pickupLandmark.trim() || "Not provided"}
 
-// Open WhatsApp
-window.open(whatsappUrl, "_blank");
+*RECIPIENT INFORMATION*
+Name: ${form.recipientName.trim()}
+Phone: ${form.recipientPhone.trim()}
+Delivery Address: ${form.deliveryAddress.trim()}
+
+*PACKAGE DETAILS*
+Package Type: ${form.packageType}
+Description: ${form.packageDescription.trim()}
+
+*PICKUP SCHEDULE*
+Date: ${form.pickupDate}
+Time: ${form.pickupTime}
+
+*DELIVERY CONFIRMATION*
+Please review this request and confirm the delivery fee and rider availability.
+    `.trim();
+
+    // ========================================
+    // WHATSAPP REDIRECTION
+    // ========================================
+
+    const encodedMessage = encodeURIComponent(message);
+
+    // Direct WhatsApp phone number URL
+    const whatsappURL =
+      "https://wa.me/" +
+      WHATSAPP_NUMBER +
+      "?text=" +
+      encodedMessage;
+
+    // Log URL for testing
+    console.log("DISPATCH WHATSAPP URL:", whatsappURL);
+
+    // Navigate to WhatsApp
+    window.location.href = whatsappURL;
   };
 
-  // =====================================
+  // ========================================
   // REUSABLE STYLES
-  // =====================================
+  // ========================================
 
   const inputClass =
     "w-full border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[#05708C] focus:ring-2 focus:ring-[#05708C]/10 transition";
@@ -194,9 +188,9 @@ window.open(whatsappUrl, "_blank");
   const labelClass =
     "block text-sm font-semibold text-gray-700 mb-2";
 
-  // =====================================
+  // ========================================
   // PAGE DESIGN
-  // =====================================
+  // ========================================
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -254,7 +248,7 @@ window.open(whatsappUrl, "_blank");
 
           <form onSubmit={handleSubmit} className="space-y-9">
 
-            {/* 01. SENDER INFORMATION */}
+            {/* SENDER INFORMATION */}
             <section>
               <div className="flex items-center gap-3 mb-5">
                 <User className="text-[#05708C]" />
@@ -301,7 +295,7 @@ window.open(whatsappUrl, "_blank");
               </div>
             </section>
 
-            {/* 02. PICKUP INFORMATION */}
+            {/* PICKUP INFORMATION */}
             <section>
               <div className="flex items-center gap-3 mb-5">
                 <MapPin className="text-[#05708C]" />
@@ -347,7 +341,7 @@ window.open(whatsappUrl, "_blank");
               </div>
             </section>
 
-            {/* 03. RECIPIENT INFORMATION */}
+            {/* RECIPIENT INFORMATION */}
             <section>
               <div className="flex items-center gap-3 mb-5">
                 <User className="text-[#05708C]" />
@@ -410,7 +404,7 @@ window.open(whatsappUrl, "_blank");
               </div>
             </section>
 
-            {/* 04. PACKAGE DETAILS */}
+            {/* PACKAGE DETAILS */}
             <section>
               <div className="flex items-center gap-3 mb-5">
                 <Package className="text-[#05708C]" />
@@ -472,7 +466,7 @@ window.open(whatsappUrl, "_blank");
               </div>
             </section>
 
-            {/* 05. PICKUP SCHEDULE */}
+            {/* PICKUP SCHEDULE */}
             <section>
               <div className="flex items-center gap-3 mb-5">
                 <Clock className="text-[#05708C]" />
