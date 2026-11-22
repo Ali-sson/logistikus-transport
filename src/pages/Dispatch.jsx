@@ -171,8 +171,7 @@ Please review this request and confirm the delivery fee and rider availability.
 
     console.log("DISPATCH WHATSAPP URL:", whatsappURL);
 
-    window.location.assign(whatsappURL);
-
+alert("Generated WhatsApp URL:\n\n" + whatsappURL);
   };
 
   // ========================================
