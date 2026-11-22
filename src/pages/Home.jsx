@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import TravelComfort from "../components/TravelComfort";
 import Testimonials from "../components/Testimonials";
 import ServiceSection from "../components/ServiceSection";
+import DispatchDelivery from "../components/DispatchDelivery";
 // import Terminals from "../components/Terminals";
 
 function Home() {
@@ -21,6 +22,8 @@ function Home() {
         <WhyChooseUs />
 
       <ServiceSection/>
+
+      <DispatchDelivery/>
         <TravelComfort/>
         {/* <RouteInfo /> */}
         {/* <Terminals /> */}

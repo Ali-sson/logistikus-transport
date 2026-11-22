@@ -9,6 +9,7 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Dispatch from "./components/Dispatch";
 import BookingDetails from "./pages/BookingDetails";
 import BookingReview from "./pages/BookingReview";
 import Payment from "./pages/Payment";
@@ -38,6 +39,8 @@ function App() {
         {/* About Page */}
         <Route path="/about" element={<About />} />
          <Route path="/contact" element={<Contact />} />
+           <Route path="/dispatch" element={<Dispatch />} />
+
 
   
 

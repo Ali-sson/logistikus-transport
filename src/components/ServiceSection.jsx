@@ -4,9 +4,10 @@ import {
   PlaneTakeoff,
   TrainFront,
   Clock,
-  CalendarDays,
+//   CalendarDays,
   BriefcaseBusiness,
   ArrowUpRight,
+  Bike
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
@@ -19,6 +20,16 @@ const servicesection = [
       "Enjoy comfortable and reliable journeys between Kaduna and Abuja with our well-maintained vehicles and professional drivers.",
     link: "/#booking",
   },
+
+    {
+    icon: Bike,
+    title: "Dispatch & Delivery",
+    description:
+      "Enjoy convenient package pickup and doorstep delivery within Kaduna. Our dispatch service makes sending and receiving items simple and reliable.",
+    link: "/contact#form",
+  },
+
+
   {
     icon: PlaneTakeoff,
     title: "Airport Pick-up & Drop-off",
@@ -35,16 +46,9 @@ const servicesection = [
   },
   {
     icon: Clock,
-    title: "Hourly Car Hire",
+    title: "Car Hire",
     description:
-      "Hire a private vehicle by the hour for meetings, errands, appointments and other personal engagements.",
-    link: "/contact#form",
-  },
-  {
-    icon: CalendarDays,
-    title: "Full-Day Car Hire",
-    description:
-      "Enjoy the convenience of a dedicated vehicle and professional driver throughout your busy day.",
+      "Enjoy flexible private car hire with a professional driver, available by the hour or for a full day. Perfect for business meetings, errands, appointments and personal engagements.",
     link: "/contact#form",
   },
   {
@@ -54,6 +58,8 @@ const servicesection = [
       "Reliable transportation solutions for individuals, executives, organisations and corporate events.",
     link: "/contact#form",
   },
+
+  
 ];
 
 const ServiceSection = () => {
@@ -103,7 +109,7 @@ const ServiceSection = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 leading-7 text-sm md:text-base">
+                <p className="text-gray-600 leading-relaxed text-sm md:text-sm">
                   {service.description}
                 </p>
 
