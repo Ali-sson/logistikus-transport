@@ -17,11 +17,11 @@ import { Link } from "react-router-dom";
 
 const WHATSAPP_NUMBER = "2347038021220";
 
-const SITE_NAME = "Logistikus Travels";
+const SITE_NAME = "Logistikus ";
 
 // ========================================
 // DISPATCH COMPONENT
-// ========================================
+// ========================================s
 
 function Dispatch() {
   const [form, setForm] = useState({
@@ -162,20 +162,17 @@ Please review this request and confirm the delivery fee and rider availability.
     // WHATSAPP REDIRECTION
     // ========================================
 
+   
+    // WHATSAPP REDIRECTION
+
     const encodedMessage = encodeURIComponent(message);
 
-    // Direct WhatsApp phone number URL
-    const whatsappURL =
-      "https://wa.me/" +
-      WHATSAPP_NUMBER +
-      "?text=" +
-      encodedMessage;
+    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-    // Log URL for testing
     console.log("DISPATCH WHATSAPP URL:", whatsappURL);
 
-    // Navigate to WhatsApp
-    window.location.href = whatsappURL;
+    window.location.assign(whatsappURL);
+
   };
 
   // ========================================
