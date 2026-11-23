@@ -9,7 +9,7 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Dispatch from "./components/Dispatch";
+import Dispatch from "./pages/Dispatch";
 import BookingDetails from "./pages/BookingDetails";
 import BookingReview from "./pages/BookingReview";
 import Payment from "./pages/Payment";

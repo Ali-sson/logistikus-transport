@@ -10,18 +10,19 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 // ========================================
 // LOGISTIKUS CONFIGURATION
 // ========================================
 
-const WHATSAPP_NUMBER = "2347038021220";
-
-const SITE_NAME = "Logistikus ";
+const WHATSAPP_NUMBER = "2349079807035";
+const SITE_NAME = "Logistikus Travels";
 
 // ========================================
 // DISPATCH COMPONENT
-// ========================================s
+// ========================================
 
 function Dispatch() {
   const [form, setForm] = useState({
@@ -38,7 +39,7 @@ function Dispatch() {
     pickupTime: "",
   });
 
-  // Get today's date
+  // Get today's date for the minimum pickup date
   const today = new Date();
 
   const minPickupDate = [
@@ -61,7 +62,7 @@ function Dispatch() {
   };
 
   // ========================================
-  // VALIDATE PHONE NUMBERS
+  // VALIDATE NIGERIAN PHONE NUMBERS
   // ========================================
 
   const validatePhone = (phone) => {
@@ -112,7 +113,7 @@ function Dispatch() {
       return;
     }
 
-    // Validate pickup schedule
+    // Validate pickup date and time
     const pickupDateTime = new Date(
       `${form.pickupDate}T${form.pickupTime}:00`
     );
@@ -159,19 +160,15 @@ Please review this request and confirm the delivery fee and rider availability.
     `.trim();
 
     // ========================================
-    // WHATSAPP REDIRECTION
+    // REDIRECT TO WHATSAPP
     // ========================================
-
-   
-    // WHATSAPP REDIRECTION
 
     const encodedMessage = encodeURIComponent(message);
 
     const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-    console.log("DISPATCH WHATSAPP URL:", whatsappURL);
-
-alert("Generated WhatsApp URL:\n\n" + whatsappURL);
+    // Open WhatsApp in the current tab
+    window.location.assign(whatsappURL);
   };
 
   // ========================================
@@ -189,6 +186,9 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
   // ========================================
 
   return (
+    <>
+
+    <Navbar />
     <div className="min-h-screen bg-slate-50">
 
       {/* HEADER */}
@@ -201,7 +201,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
           >
             <ArrowLeft size={17} />
             Back to Home
-          </Link>
+          </Link >
 
           <div className="flex items-center gap-3 mb-5">
             <div className="bg-white/10 p-3 rounded-xl">
@@ -224,7 +224,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
           </p>
 
         </div>
-      </header>
+      </header> 
 
       {/* BOOKING FORM */}
       <main className="max-w-4xl mx-auto px-5 py-12">
@@ -247,7 +247,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
             {/* SENDER INFORMATION */}
             <section>
               <div className="flex items-center gap-3 mb-5">
-                <User className="text-[#05708C]" />
+                <User c lassName="text-[#05708C]" />
 
                 <h3 className="text-lg font-bold text-gray-800">
                   01. Sender Information
@@ -270,7 +270,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     className={inputClass}
                     required
                   />
-                </div>
+                </div> 
 
                 <div>
                   <label className={labelClass}>
@@ -293,7 +293,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
 
             {/* PICKUP INFORMATION */}
             <section>
-              <div className="flex items-center gap-3 mb-5">
+              <div cl assName="flex items-center gap-3 mb-5">
                 <MapPin className="text-[#05708C]" />
 
                 <h3 className="text-lg font-bold text-gray-800">
@@ -316,7 +316,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     placeholder="Enter pickup address in Kaduna"
                     className={inputClass}
                     required
-                  />
+                  /> 
                 </div>
 
                 <div>
@@ -339,7 +339,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
 
             {/* RECIPIENT INFORMATION */}
             <section>
-              <div className="flex items-center gap-3 mb-5">
+              <div clas sName="flex items-center gap-3 mb-5">
                 <User className="text-[#05708C]" />
 
                 <h3 className="text-lg font-bold text-gray-800">
@@ -362,7 +362,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     placeholder="Recipient's name"
                     className={inputClass}
                     required
-                  />
+                                 />
                 </div>
 
                 <div>
@@ -408,7 +408,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                 <h3 className="text-lg font-bold text-gray-800">
                   04. Package Details
                 </h3>
-              </div>
+               </div>
 
               <div className="space-y-5">
 
@@ -431,7 +431,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     </option>
                     <option value="Clothing and Fashion">
                       Clothing and Fashion
-                    </option>
+                       </option>
                     <option value="Electronics">Electronics</option>
                     <option value="Personal Items">
                       Personal Items
@@ -454,7 +454,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     onChange={handleChange}
                     placeholder="Briefly describe the item you want delivered..."
                     rows={4}
-                    className={inputClass}
+                     className={inputClass}
                     required
                   />
                 </div>
@@ -477,7 +477,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                 <div>
                   <label className={labelClass}>
                     Preferred Pickup Date *
-                  </label>
+                    </label>
 
                   <input
                     type="date"
@@ -499,7 +499,7 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                     type="time"
                     name="pickupTime"
                     value={form.pickupTime}
-                    onChange={handleChange}
+                     onChange={handleChange}
                     className={inputClass}
                     required
                   />
@@ -522,8 +522,8 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
                 the booking is confirmed.
               </p>
 
-            </div>
-
+             </div>
+ 
             {/* SUBMIT BUTTON */}
             <button
               type="submit"
@@ -542,7 +542,11 @@ alert("Generated WhatsApp URL:\n\n" + whatsappURL);
         </div>
       </main>
     </div>
-  );
+
+    <Footer />
+    </>
+  ); 
 }
 
 export default Dispatch;
+ 

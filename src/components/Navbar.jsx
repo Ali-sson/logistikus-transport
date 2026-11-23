@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, UserRound, Bike } from "lucide-react";
 import logo from "../assets/Logo2.png";
 
@@ -11,7 +12,7 @@ function Navbar() {
     { label: "Our Services", href: "/about/#services" },
     // { label: "Rates & Schedule", href: "#schedule" },
     { label: "Contact", href: "/contact" },
-     { label: "Dispatch", href: "/dispatch" },
+    //  { label: "Dispatch", href: "/dispatch" },
   ];
 
   return (
@@ -39,7 +40,7 @@ function Navbar() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href="#booking"
+            href="/#booking"
             className="flex items-center gap-2 text-sm font-medium text-brand-blue"
           >
             <UserRound size={17} />
@@ -47,7 +48,7 @@ function Navbar() {
           </a>
 
           <a
-            href="#booking"
+            href="/dispatch"
             className="flex gap-2 rounded-full bg-brand-teal px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue"
           >
              <Bike size={19} />
@@ -89,13 +90,13 @@ function Navbar() {
             </a>
 
             
-            <a
-              href="/dispatch"
-              onClick={() => setMenuOpen(false)}
-              className="rounded-lg bg-brand-teal px-4 py-3 text-center font-semibold text-white"
-            >
-              Dispatch & Delivery
-            </a>
+           <Link
+  to="/dispatch"
+  onClick={() => setMenuOpen(false)}
+  className="rounded-lg bg-brand-teal px-4 py-3 text-center font-semibold text-white"
+>
+  Dispatch & Delivery
+</Link>
 
           </div>
         </div>

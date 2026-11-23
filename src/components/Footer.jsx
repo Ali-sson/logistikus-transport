@@ -1,8 +1,8 @@
 
 import {
   MapPin,
-  // Phone,
-  // Mail,
+  Phone,
+  Mail,
   ArrowRight,
 } from "lucide-react";
 
@@ -15,7 +15,7 @@ function Footer() {
       className="bg-brand-blue text-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
           {/* Company information */}
           <div>
@@ -104,23 +104,21 @@ function Footer() {
             </p> */}
           </div>
 
-          {/* Contact */}
-          {/* <div>
+           <div>
             <h3 className="text-lg font-bold">Contact Us</h3>
 
             <div className="mt-5 space-y-4 text-sm text-white/75">
-              <p className="flex items-start gap-3">
+              {/* <p className="flex items-start gap-3">
                 <Phone size={18} className="mt-0.5 shrink-0 text-cyan-300" />
                 <span>0816 725 1663</span>
                 <span>0816 128 5804</span>
 
-              </p>
+              </p> */}
 
               <p className="flex items-start gap-3">
                 <Mail size={18} className="mt-0.5 shrink-0 text-cyan-300" />
-                <span> email to be confirmed</span>
+                <span> support@logistikus.com</span>
               </p>
-s
             
 
              <div className="mt-4 space-y-3 text-sm text-white/75">
@@ -149,7 +147,7 @@ s
 
 
             </div>
-          </div> */}
+          </div>
         </div>
 
         {/* Bottom bar */}

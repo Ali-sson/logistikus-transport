@@ -39,7 +39,7 @@ function Hero() {
             </a>
 
             <a
-              href="/about"
+              href="/dispatch"
               className="inline-flex items-center gap-2 rounded-lg border border-white/70 bg-white/90 px-6 py-3 font-semibold text-brand-blue transition hover:bg-white/100 hover:text-brand-blue"
             >
                 <Bike size={19} />

@@ -26,7 +26,7 @@ const servicesection = [
     title: "Dispatch & Delivery",
     description:
       "Enjoy convenient package pickup and doorstep delivery within Kaduna. Our dispatch service makes sending and receiving items simple and reliable.",
-    link: "/contact#form",
+    link: "/dispatch",
   },
 
 
