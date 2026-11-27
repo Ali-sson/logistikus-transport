@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 // LOGISTIKUS CONFIGURATION
 // ========================================
 
-const WHATSAPP_NUMBER = "2349079807035";
+const WHATSAPP_NUMBER = "2349112149392";
 const SITE_NAME = "Logistikus Travels";
 
 // ========================================
